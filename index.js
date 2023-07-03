@@ -20,15 +20,11 @@ async function initNear() {
   const account = await near.account('nicoknaq.testnet');
   // console.log(account);
   const contract = new nearAPI.Contract(account, 'nicoknaq.testnet', {
-    viewMethods: ['is_registered'], // Métodos de lectura del contrato
+    viewMethods: ['is_registered', 'ft_metadata'], // Métodos de lectura del contrato
     changeMethods: ['register_account'], // Métodos de escritura del contrato
   });
-  contract.register_account({
-    args: {
-      recipient: 'unanueva.testnet',
-      amount: '10000000000000000000000',
-    },
-  });
+  const test = await contract.ft_metadata({});
+  console.log(test);
 }
 
 initNear();
